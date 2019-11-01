@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@mipmap/background">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_marginBottom="32dp"
+            android:layout_above="@+id/buttonPanelContainer">
+        <TextView
+                android:clickable="true"
+                android:focusable="true"
+                android:id="@+id/createNotification"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"
+                android:text="@string/make_notification"
+                android:background="@mipmap/oval"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <FrameLayout
+            android:id="@+id/buttonPanelContainer"
+            android:layout_width="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="64dp"
+            android:layout_height="wrap_content">
+
+        <TextView
+                android:layout_gravity="center"
+                android:backgroundTint="@color/colorPrimary"
+                android:background="@mipmap/rectangle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        <ImageView
+                android:clickable="true"
+                android:id="@+id/minusImage"
+                android:src="@mipmap/minus"
+                android:padding="30dp"
+                android:layout_marginStart="12dp"
+                android:layout_gravity="center_vertical|start"
+                android:background="@mipmap/blue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/minus_image_content_description" android:focusable="true"/>
+        <ImageView
+                android:clickable="true"
+                android:focusable="true"
+                android:id="@+id/plusImage"
+                android:src="@mipmap/plus"
+                android:padding="30dp"
+                android:layout_marginEnd="12dp"
+                android:layout_gravity="center_vertical|end"
+                android:background="@mipmap/blue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/plus_image_content_description"/>
+    </FrameLayout>
+</RelativeLayout>
