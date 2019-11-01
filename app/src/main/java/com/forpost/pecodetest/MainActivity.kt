@@ -33,14 +33,27 @@ class MainActivity : AppCompatActivity() {
         }
 
         override fun add() {
-            adapter.add(NotificationFragment(screenCount++))
+            val fragment = supportFragmentManager.fragments.findNotificationFragment(++screenCount)
+                ?: NotificationFragment(screenCount)
+            adapter.add(fragment)
+            viewPager.setCurrentItem(screenCount - 1, true)
         }
 
         override fun remove() {
-            if (screenCount == 0) return
+            if (screenCount <= 1) return
+            viewPager.setCurrentItem(--screenCount - 1, true)
             adapter.remove()
-            screenCount--
         }
+    }
+
+    private fun List<Fragment>.findNotificationFragment(number: Int): Fragment? {
+        for (fragment in this) {
+            val currentName = NotificationFragment.makeFragmentName(number)
+            val fragmentName = fragment.arguments?.getString(NotificationFragment.ARG_FRAGMENT_NAME) ?: ""
+            if (currentName == fragmentName)
+                return fragment
+        }
+        return null
     }
 
     class NotificationFragmentAdapter(fragmentManager: FragmentManager) :
@@ -58,6 +71,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         fun remove() {
+            if (fragments.isEmpty()) return
             fragments.removeAt(fragments.size - 1)
             notifyDataSetChanged()
         }
