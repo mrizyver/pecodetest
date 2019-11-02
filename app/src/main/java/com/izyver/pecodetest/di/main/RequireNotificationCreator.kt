@@ -1,7 +1,7 @@
 package com.izyver.pecodetest.di.main
 
-import com.izyver.pecodetest.NotificationCreator
+import com.izyver.pecodetest.notifications.NotificationCreator
 
 interface RequireNotificationCreator{
-    fun setNotificatonCreator(creator: NotificationCreator)
+    fun setNotificationCreator(creator: NotificationCreator)
 }

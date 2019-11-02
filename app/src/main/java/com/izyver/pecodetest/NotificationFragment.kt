@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.izyver.pecodetest.di.main.RequireNotificationCreator
 import com.izyver.pecodetest.di.main.RequireScreenController
+import com.izyver.pecodetest.notifications.NotificationCreator
 import kotlinx.android.synthetic.main.fragmetn_notification.*
 
 class NotificationFragment() : Fragment(),
@@ -33,14 +34,14 @@ class NotificationFragment() : Fragment(),
         val number = arguments?.getInt(ARG_NUMBER) ?: 1
         initButtons(number)
         counter.text = number.toString()
-        createNotification.setOnClickListener { }
+        createNotification.setOnClickListener { mNotificationCreator?.create(number) }
     }
 
     override fun setScreenController(screenController: ScreenController) {
         mController = screenController
     }
 
-    override fun setNotificatonCreator(creator: NotificationCreator) {
+    override fun setNotificationCreator(creator: NotificationCreator) {
         mNotificationCreator = creator
     }
 

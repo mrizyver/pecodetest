@@ -5,4 +5,8 @@
     <string name="plus_image_content_description">Button for creating new fragment</string>
     <string name="notification_fragment_created_format">Fragment %d created</string>
     <string name="notification_fragment_deleted_format">Fragment %d deleted </string>
+    <string name="chanel_name">Screens notification</string>
+    <string name="chanel_description">Notification created from some screen</string>
+    <string name="notification_title">Chat heads active</string>
+    <string name="notification_content_format">Notification %d</string>
 </resources>
