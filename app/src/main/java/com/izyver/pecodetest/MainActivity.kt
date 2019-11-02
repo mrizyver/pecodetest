@@ -21,6 +21,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     private lateinit var adapter: NotificationFragmentAdapter
+    private lateinit var screenController: MainScreenController
 
     @RequiresApi
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,12 +31,16 @@ class MainActivity : AppCompatActivity() {
         adapter = NotificationFragmentAdapter(supportFragmentManager)
         viewPager.adapter = adapter
 
+        screenController = MainScreenController()
+        screenController.restoreState(savedInstanceState?.getInt(KEY_SCREEN_CONTROLLER_STATE) ?: 1)
         supportFragmentManager.registerFragmentLifecycleCallbacks(
-            MainModuleInjector(
-                MainScreenController(),
-                MainNotificationCreator(this)
-            ), true
+            MainModuleInjector(screenController, MainNotificationCreator(this)), true
         )
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt(KEY_SCREEN_CONTROLLER_STATE, screenController.count)
     }
 
     override fun onNewIntent(intent: Intent?) {
@@ -51,8 +56,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     inner class MainScreenController : ScreenController {
-        override val count: Int get() = screenCount
         private var screenCount = 0
+        override val count: Int get() = screenCount
         private val toastShower: NavigationToastShower by lazy {
             val context = this@MainActivity
             val duration = Toast.LENGTH_SHORT
@@ -62,10 +67,6 @@ class MainActivity : AppCompatActivity() {
                 ReflectToastShower(context, duration, deletedPattern, createdPattern)
             else
                 SimpleToastShower(context, duration, deletedPattern, createdPattern)
-        }
-
-        init {
-            add()
         }
 
         override fun add() {
@@ -88,6 +89,12 @@ class MainActivity : AppCompatActivity() {
             }
             adapter.remove()
         }
+
+        fun restoreState(number: Int){
+            repeat(number){
+                add()
+            }
+        }
     }
 
     private fun List<Fragment>.findNotificationFragment(number: Int): Fragment? {
@@ -101,5 +108,6 @@ class MainActivity : AppCompatActivity() {
 
     private companion object {
         private val enableReflectForBetterUI = SDK_INT < P && BuildConfig.ENABLE_REFLECTION
+        private const val KEY_SCREEN_CONTROLLER_STATE = "screen_controller_state"
     }
 }
