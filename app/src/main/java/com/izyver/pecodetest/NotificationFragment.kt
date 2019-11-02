@@ -1,4 +1,4 @@
-package com.forpost.pecodetest
+package com.izyver.pecodetest
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,8 +6,8 @@ import android.view.View
 import android.view.View.GONE
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.forpost.pecodetest.di.RequireScreenController
-import com.forpost.pecodetest.di.ScreenController
+import com.izyver.pecodetest.di.RequireScreenController
+import com.izyver.pecodetest.di.ScreenController
 import kotlinx.android.synthetic.main.fragmetn_notification.*
 
 class NotificationFragment() : Fragment(), RequireScreenController {

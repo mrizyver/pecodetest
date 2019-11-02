@@ -1,4 +1,4 @@
-package com.forpost.pecodetest.di
+package com.izyver.pecodetest.di
 
 import android.content.Context
 import androidx.fragment.app.Fragment

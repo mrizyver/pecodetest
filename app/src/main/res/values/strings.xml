@@ -3,4 +3,6 @@
     <string name="make_notification">Create new\nnotification</string>
     <string name="minus_image_content_description">Button for removing fragment</string>
     <string name="plus_image_content_description">Button for creating new fragment</string>
+    <string name="notification_fragment_created_format">Fragment %d created</string>
+    <string name="notification_fragment_deleted_format">Fragment %d deleted </string>
 </resources>

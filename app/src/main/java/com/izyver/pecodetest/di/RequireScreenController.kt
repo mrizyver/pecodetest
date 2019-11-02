@@ -1,4 +1,4 @@
-package com.forpost.pecodetest.di
+package com.izyver.pecodetest.di
 
 interface RequireScreenController {
     fun setScreenController(screenController: ScreenController)
