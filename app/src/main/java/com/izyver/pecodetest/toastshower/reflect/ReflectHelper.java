@@ -63,4 +63,17 @@ class ReflectHelper {
             return false;
         }
     }
+
+    boolean setCallback(Handler handler, Handler.Callback callback){
+        try {
+            Class<Handler> handlerClass = Handler.class;
+            Field mCallbackField = handlerClass.getDeclaredField("mCallback");
+            mCallbackField.setAccessible(true);
+            mCallbackField.set(handler, callback);
+            return true;
+        } catch (NoSuchFieldException|IllegalAccessException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
