@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.izyver.pecodetest.di.main.RequireNotificationCreator
@@ -13,7 +14,6 @@ import kotlinx.android.synthetic.main.fragmetn_notification.*
 
 class NotificationFragment() : Fragment(),
     RequireScreenController, RequireNotificationCreator {
-
 
     constructor(number: Int) : this() {
         val args = Bundle()
@@ -46,10 +46,22 @@ class NotificationFragment() : Fragment(),
     }
 
     private fun initButtons(number: Int) {
-        if (number > 1) minusImage.setOnClickListener { mController?.remove() }
-        else minusImage.visibility = GONE
+        updateMinusVisibility(number)
+        minusImage.setOnClickListener {
+            mController?.remove()
+            updateMinusVisibility(number)
+        }
 
         plusImage.setOnClickListener { mController?.add() }
+    }
+
+    private fun updateMinusVisibility(number: Int) {
+        if (number > 1) return
+        val count = mController?.count ?: return
+        val isMinusVisible = count > 1
+        val visibility = if (isMinusVisible) VISIBLE else GONE
+        if (visibility == minusImage.visibility) return
+        minusImage.visibility = visibility
     }
 
     companion object Constants {

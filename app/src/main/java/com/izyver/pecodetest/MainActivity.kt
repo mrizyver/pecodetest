@@ -44,13 +44,14 @@ class MainActivity : AppCompatActivity() {
         if (intent.action == ACTION_OPEN_SPECIFIC_SCREEN) openScreen(intent)
     }
 
-    private fun openScreen(intent: Intent){
+    private fun openScreen(intent: Intent) {
         val extras = intent.extras ?: return
         val number = extras[KEY_NUMBER_OF_SCREEN] as? Int ?: return
         viewPager?.setCurrentItem(number - 1, true)
     }
 
     inner class MainScreenController : ScreenController {
+        override val count: Int get() = screenCount
         private var screenCount = 0
         private val toastShower: NavigationToastShower by lazy {
             val context = this@MainActivity
