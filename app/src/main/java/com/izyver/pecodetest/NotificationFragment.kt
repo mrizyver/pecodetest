@@ -6,11 +6,13 @@ import android.view.View
 import android.view.View.GONE
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.izyver.pecodetest.di.RequireScreenController
-import com.izyver.pecodetest.di.ScreenController
+import com.izyver.pecodetest.di.main.RequireNotificationCreator
+import com.izyver.pecodetest.di.main.RequireScreenController
 import kotlinx.android.synthetic.main.fragmetn_notification.*
 
-class NotificationFragment() : Fragment(), RequireScreenController {
+class NotificationFragment() : Fragment(),
+    RequireScreenController, RequireNotificationCreator {
+
 
     constructor(number: Int) : this() {
         val args = Bundle()
@@ -19,11 +21,8 @@ class NotificationFragment() : Fragment(), RequireScreenController {
         arguments = args
     }
 
-    var controller: ScreenController? = null
-
-    override fun setScreenController(screenController: ScreenController) {
-        controller = screenController
-    }
+    private var mController: ScreenController? = null
+    private var mNotificationCreator: NotificationCreator? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragmetn_notification, container, false)
@@ -37,11 +36,19 @@ class NotificationFragment() : Fragment(), RequireScreenController {
         createNotification.setOnClickListener { }
     }
 
+    override fun setScreenController(screenController: ScreenController) {
+        mController = screenController
+    }
+
+    override fun setNotificatonCreator(creator: NotificationCreator) {
+        mNotificationCreator = creator
+    }
+
     private fun initButtons(number: Int) {
-        if (number > 1) minusImage.setOnClickListener { controller?.remove() }
+        if (number > 1) minusImage.setOnClickListener { mController?.remove() }
         else minusImage.visibility = GONE
 
-        plusImage.setOnClickListener { controller?.add() }
+        plusImage.setOnClickListener { mController?.add() }
     }
 
     companion object Constants {

@@ -7,8 +7,8 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.izyver.pecodetest.di.ScreenController
-import com.izyver.pecodetest.di.ScreenControllerInjector
+import com.izyver.pecodetest.adapters.NotificationFragmentAdapter
+import com.izyver.pecodetest.di.main.MainModuleInjector
 import com.izyver.pecodetest.toastshower.NavigationToastShower
 import com.izyver.pecodetest.toastshower.SimpleToastShower
 import com.izyver.pecodetest.toastshower.reflect.ReflectToastShower
@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         viewPager.adapter = adapter
 
         supportFragmentManager.registerFragmentLifecycleCallbacks(
-            ScreenControllerInjector(MainScreenController()), true
+            MainModuleInjector(MainScreenController(), MainNotificationCreator(this)), true
         )
     }
 

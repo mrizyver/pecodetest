@@ -1,4 +1,4 @@
-package com.izyver.pecodetest.di
+package com.izyver.pecodetest
 
 interface ScreenController {
     fun add()

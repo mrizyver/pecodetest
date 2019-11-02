@@ -1,4 +1,4 @@
-package com.izyver.pecodetest
+package com.izyver.pecodetest.adapters
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
