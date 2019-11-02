@@ -1,6 +1,6 @@
 package com.izyver.pecodetest
 
-import android.os.Build
+import android.os.Build.VERSION.SDK_INT
 import android.os.Build.VERSION_CODES.P
 import android.os.Bundle
 import android.widget.Toast
@@ -80,6 +80,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private companion object {
-        private val enableReflectForBetterUI = Build.VERSION.SDK_INT < P
+        private val enableReflectForBetterUI = SDK_INT < P && BuildConfig.ENABLE_REFLECTION
     }
 }

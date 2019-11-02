@@ -7,6 +7,8 @@ apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.1"
+
+
     defaultConfig {
         applicationId "com.forpost.pecodetest"
         minSdkVersion 21
@@ -16,9 +18,14 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        def enableReflect = true
         release {
+            buildConfigField "boolean", "ENABLE_REFLECTION", "$enableReflect"
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            buildConfigField "boolean", "ENABLE_REFLECTION", "$enableReflect"
         }
     }
 }
