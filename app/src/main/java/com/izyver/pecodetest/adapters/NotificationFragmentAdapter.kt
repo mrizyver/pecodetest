@@ -7,7 +7,7 @@ import androidx.viewpager.widget.PagerAdapter
 
 class NotificationFragmentAdapter(fragmentManager: FragmentManager) :
     FragmentStatePagerAdapter(fragmentManager,
-        BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
+        BEHAVIOR_SET_USER_VISIBLE_HINT
     ) {
 
     private val fragments = ArrayList<Fragment>()
@@ -18,7 +18,7 @@ class NotificationFragmentAdapter(fragmentManager: FragmentManager) :
 
     override fun getItemPosition(fragment: Any): Int {
         val index = fragments.indexOf(fragment)
-        if( index < 0) return PagerAdapter.POSITION_NONE
+        if( index < 0) return PagerAdapter.POSITION_UNCHANGED
         return index
     }
 

@@ -29,9 +29,16 @@ class NotificationFragment() : Fragment(),
         return inflater.inflate(R.layout.fragmetn_notification, container, false)
     }
 
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if (isVisibleToUser){
+            updateMinusVisibility(getNumber())
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val number = arguments?.getInt(ARG_NUMBER) ?: 1
+        val number = getNumber()
         initButtons(number)
         counter.text = number.toString()
         createNotification.setOnClickListener { mNotificationCreator?.create(number) }
@@ -45,23 +52,25 @@ class NotificationFragment() : Fragment(),
         mNotificationCreator = creator
     }
 
+    private fun getNumber() = arguments?.getInt(ARG_NUMBER) ?: 1
+
     private fun initButtons(number: Int) {
         updateMinusVisibility(number)
-        minusImage.setOnClickListener {
+        minusImage?.setOnClickListener {
             mController?.remove()
             updateMinusVisibility(number)
         }
 
-        plusImage.setOnClickListener { mController?.add() }
+        plusImage?.setOnClickListener { mController?.add() }
     }
 
     private fun updateMinusVisibility(number: Int) {
         if (number > 1) return
-        val count = mController?.count ?: return
+        val count = mController?.count ?: 1
         val isMinusVisible = count > 1
         val visibility = if (isMinusVisible) VISIBLE else GONE
-        if (visibility == minusImage.visibility) return
-        minusImage.visibility = visibility
+        if (visibility == minusImage?.visibility) return
+        minusImage?.visibility = visibility
     }
 
     companion object Constants {
